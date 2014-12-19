@@ -6,10 +6,13 @@ public class CameraController : MonoBehaviour {
 
     public GameObject MainCamera;
     public GameObject MetaCamera;
-    public GameObject GlassPane;
+
+	public GameObject NetworkController;
+	NetworkManager NetworkManagerScript;
 
  public Transform WorldCenter;
   public Transform PlayerCenter;
+	GameObject player;
 
   private Transform TargetLookAt;
 
@@ -66,14 +69,12 @@ sliders.SetActive(false);
      // Activate regular camera if not using Meta
      if (InputType == 0 || InputType == 1){
          MetaCamera.SetActive(false);
-         GlassPane.SetActive(false);
          MainCamera.SetActive(true);
      }
 
      if (InputType == 2){
          Distance *= 2;
        MetaCamera.SetActive(true);
-         GlassPane.SetActive(true);
          MainCamera.SetActive(false);
      }
 
@@ -81,9 +82,20 @@ sliders.SetActive(false);
      Distance = Mathf.Clamp(Distance, DistanceMin, DistanceMax);
      startingDistance = Distance;
      Reset();
- }
- 
+
+
+	}
+	
  void Update (){
+
+		if (PlayerCenter == null) {
+			NetworkManagerScript = NetworkController.GetComponent<NetworkManager>();
+			PlayerCenter = NetworkManagerScript.ReturnPlayer().transform;
+
+			return;
+		}
+
+
      if (TargetLookAt == null)
          return;
          
@@ -133,7 +145,6 @@ sliders.SetActive(false);
      
      // this is where the mouseY is limited - Helper script
      mouseY = Mathf.Clamp(mouseY, Y_MinLimit, Y_MaxLimit);
-     Debug.Log(mouseY);
    
      // get Mouse Wheel Input
      if ((Input.GetAxis("Mouse ScrollWheel") < -deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone))
@@ -150,13 +161,11 @@ sliders.SetActive(false);
  }
  
  void  CalculateDesiredPosition (){
-     Debug.Log("Calculating desired position");
      // Evaluate distance
      Distance = Mathf.SmoothDamp(Distance, desiredDistance, ref velocityDistance, DistanceSmooth);
      
      // Calculate desired position -> Note : mouse inputs reversed to align to WorldSpace Axis
      desiredPosition = CalculatePosition(mouseY, mouseX, Distance);
-     Debug.Log("Desired position:" + desiredPosition);
  }
  
 
@@ -195,8 +204,8 @@ sliders.SetActive(false);
  }
  
  void  Reset (){
-     mouseX = 0;
-     mouseY = 10;
+     mouseX = mouseX;
+     mouseY = mouseY;
      Distance = startingDistance;
      desiredDistance = Distance;
  }

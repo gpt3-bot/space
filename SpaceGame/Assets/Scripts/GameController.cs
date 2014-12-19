@@ -8,12 +8,14 @@ public class GameController : MonoBehaviour {
 	public GameObject camera;
     public enum InputTypes {Mouse, Touch, Meta};
     public InputTypes InputType;
+	public GameObject NetworkController;
+	NetworkManager NetworkManagerScript;
     // 0 = mouse, 1 = touch, 2 = voice
     public GameObject GlassPaneObject; // you will need this if scriptB is in another GameObject
     private GlassPane GlassPaneScript;
 	public float speed;
 	public float rotationSpeed;
-	public GameObject player;
+	GameObject player;
 	public GameObject locator;
 	public LayerMask elevatorMask;
 	Vector3 GoTo;
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GlassPaneScript = GlassPaneObject.GetComponent<GlassPane>();
+
 
 	}
 	
@@ -38,6 +41,13 @@ public class GameController : MonoBehaviour {
 
 	void Navigate()
 	{
+
+
+		if (player == null) {
+			NetworkManagerScript = NetworkController.GetComponent<NetworkManager>();
+			player = NetworkManagerScript.ReturnPlayer();
+						return;
+				}
 
 
 
