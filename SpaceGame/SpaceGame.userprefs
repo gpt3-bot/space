@@ -1,0 +1,26 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\VoiceCommands.cs">
+    <Files>
+      <File FileName="Assets\Scripts\GlassPaneRaycaster.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GoToOnTouch.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ResizeElevator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\RotateWithMouse.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\RotateCameraC.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Raycasting.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Elevator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Grid.cs" Line="1" Column="1" />
+      <File FileName="Assets\Rotator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Meta\MetaApps\Meta Welcome\Scripts\MetaWelcome.cs" Line="1" Column="1" />
+      <File FileName="Assets\RaycastElevator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CurrentPosition.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UDP_RecoServer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UISliders.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\VoiceCommands.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
