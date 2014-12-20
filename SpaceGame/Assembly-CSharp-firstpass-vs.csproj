@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_5_0_0;UNITY_5_0;UNITY_5;UNITY_64;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_OBSOLETE_API_UPDATING;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_0_0;UNITY_5_0;UNITY_5;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_OBSOLETE_API_UPDATING;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -56,6 +56,22 @@
      <Compile Include="Assets\Plugins\ChatApi\ChatState.cs" />
      <Compile Include="Assets\Plugins\ChatApi\ChatUserStatus.cs" />
      <Compile Include="Assets\Plugins\ChatApi\IChatClientListener.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\CoherentUILiveGameView.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\CoherentUISystem.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\CoherentUIView.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\CoherentCameraLive.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\CoherentExposePropertyAttribute.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\CoherentMethodAttribute.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\CoherentUIDialog.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\CoherentUIViewRenderer.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\FileHandler.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\IMEHandler.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\InputManager.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\License.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\LogHandler.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\SystemListener.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\Detail\ViewListener.cs" />
+     <Compile Include="Assets\Standard Assets\Scripts\CoherentUI\MobileSurfaceView.cs" />
      <None Include="Assets\Standard Assets\Shaders\Particle Shaders\Mobile Multiply Culled.shader" />
      <None Include="Assets\Standard Assets\Shaders\Miscellaneous Shaders\Mobile Background.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\AspectSphereShader.shader" />
@@ -65,8 +81,10 @@
      <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\Standard Assets\Shaders\Miscellaneous Shaders\Mobile Detail.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\VisualSensorLineShader.shader" />
+     <None Include="Assets\CoherentUI\Copyright.txt" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Meta Packages\LeanTween\LeanTween-ReadMe.txt" />
+     <None Include="Assets\Standard Assets\Shaders\CoherentUI\DiffuseIgnoreZ.shader" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
      <None Include="Assets\Meta Packages\Vectrosity\Documentation\Vectrosity changelog.txt" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingInclude.cginc" />
@@ -87,6 +105,7 @@
      <None Include="Assets\Meta\MetaDocs\META EULA.txt" />
      <None Include="Assets\Meta\MetaSpace\Shaders\Particle AddMeta.shader" />
      <None Include="Assets\Standard Assets\Shaders\Vertex Colored Shaders\Mobile Vertex Colored.shader" />
+     <None Include="Assets\CoherentUI\Samples\Scenes\Sample06_Oculus\Readme.txt" />
      <None Include="Assets\Standard Assets\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap Only.shader" />
      <None Include="Assets\RAIN\ReleaseNotes.txt" />
      <None Include="Assets\Standard Assets\Shaders\Lightmap Shaders (Legacy)\Mobile Lightmap AlphaTest.shader" />
@@ -95,6 +114,7 @@
      <None Include="Assets\Photon Unity Networking\readme.txt" />
      <None Include="Assets\Meta\MetaSpace\MetaFonts\Arial Bold\3DTextTextured.shader" />
      <None Include="Assets\RAIN\Editor\Shaders\NavMeshColliderShader.shader" />
+     <None Include="Assets\Standard Assets\Shaders\CoherentUI\TransparentDiffuseIgnoreZ.shader" />
      <None Include="Assets\TurretSystem\readme.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
@@ -113,6 +133,12 @@
  </Reference>
  <Reference Include="RAIN">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/RAIN/RAIN.dll</HintPath>
+ </Reference>
+ <Reference Include="CoherentUINet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUINet.dll</HintPath>
+ </Reference>
+ <Reference Include="CoherentUIMobileNet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUIMobileNet.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

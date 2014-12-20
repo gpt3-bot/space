@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour {
 
 	GameObject MainCamera;
 	GameObject MetaCamera;
-	static GameObject camera;
+	static GameObject theCamera;
  	public Transform WorldCenter;
  	static Transform PlayerCenter;
 	GameObject player;
@@ -113,7 +113,7 @@ public class CameraController : MonoBehaviour {
 		}
 		// Activate regular camera if not using Meta
 		if (InputType == 0 || InputType == 1){
-			camera = MainCamera;
+			theCamera = MainCamera;
 		}
 
 		// Activate the Meta camera
@@ -121,7 +121,7 @@ public class CameraController : MonoBehaviour {
 			Distance *= 2;
 			MetaCamera.SetActive(true);
 			MainCamera.SetActive(false);
-			camera = MetaCamera;
+			theCamera = MetaCamera;
 		}
 
 
@@ -229,17 +229,17 @@ public class CameraController : MonoBehaviour {
      if (InputType == 0 || InputType == 1)
      {
 
-         camera.transform.position = position;
+			theCamera.transform.position = position;
 
-			camera.transform.LookAt(TargetLookAt);
+			theCamera.transform.LookAt(TargetLookAt);
 
      }
      if (InputType == 2)
      {
 
-			camera.transform.position = position;
+			theCamera.transform.position = position;
 
-			camera.transform.LookAt(TargetLookAt);
+			theCamera.transform.LookAt(TargetLookAt);
 
      }
 
@@ -279,7 +279,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public static GameObject returnCamera(){
-		return camera;
+		return theCamera;
 	}
 
 

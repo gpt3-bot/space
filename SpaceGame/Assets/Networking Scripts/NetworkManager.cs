@@ -109,8 +109,5 @@ public class NetworkManager : Photon.MonoBehaviour {
 	public static GameObject ReturnPlayer(){
 		return myShip;
 	}
-	
-	void SpawnEnemy() {
-		PhotonNetwork.Instantiate( "Enemy1", Vector3.forward * 10f, Quaternion.identity, 0 );
-	}
+
 }
