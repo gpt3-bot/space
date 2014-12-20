@@ -5,14 +5,45 @@ using Meta.Apps;
 
 public class GameController : MonoBehaviour {
 
-	public GameObject camera;
+	
+	private static GameController _instance;
+	
+	public static GameController instance
+	{
+		get
+		{
+			if(_instance == null)
+			{
+				_instance = GameObject.FindObjectOfType<GameController>();
+				
+				//Tell unity not to destroy this object when loading a new scene!
+				DontDestroyOnLoad(_instance.gameObject);
+			}
+			
+			return _instance;
+		}
+	}
+	
+	void Awake() 
+	{
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
+	}
     public enum InputTypes {Mouse, Touch, Meta};
-    public InputTypes InputType;
-	public GameObject NetworkController;
-	NetworkManager NetworkManagerScript;
+    static public InputTypes InputType;
     // 0 = mouse, 1 = touch, 2 = voice
-    public GameObject GlassPaneObject; // you will need this if scriptB is in another GameObject
-    private GlassPane GlassPaneScript;
+
 	public float speed;
 	public float rotationSpeed;
 	GameObject player;
@@ -21,13 +52,10 @@ public class GameController : MonoBehaviour {
 	Vector3 GoTo;
 	Vector3 playerToMouse;
 	Quaternion newRotation;
-	public Rigidbody rigidbody;
 	Vector3 currentposition;
 
 	// Use this for initialization
 	void Start () {
-        GlassPaneScript = GlassPaneObject.GetComponent<GlassPane>();
-
 
 	}
 	
@@ -44,29 +72,33 @@ public class GameController : MonoBehaviour {
 
 
 		if (player == null) {
-			NetworkManagerScript = NetworkController.GetComponent<NetworkManager>();
-			player = NetworkManagerScript.ReturnPlayer();
+			player = NetworkManager.ReturnPlayer();
 						return;
 				}
 
 
 
-		//Cast a ray from our screen to the mouse pointer, effectively finding a point on the plane
-		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-		//Define a var we'll use later
-		RaycastHit floorHit;
-		//If the raycast returns true i.e. hits the floor
-		if (Physics.Raycast (camRay, out floorHit, Mathf.Infinity, elevatorMask))
-		{
+		if (InputType == InputTypes.Mouse || InputType == InputTypes.Touch) {
 
-			locator.transform.position = floorHit.point;
+						//Cast a ray from our screen to the mouse pointer, effectively finding a point on the plane
+						Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+						//Define a var we'll use later
+						RaycastHit floorHit;
+						//If the raycast returns true i.e. hits the floor
+						if (Physics.Raycast (camRay, out floorHit, Mathf.Infinity, elevatorMask)) {
 
-			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()){ 
-				// Non-UI mouse click 
-				GoTo = floorHit.point;
-			}
+								locator.transform.position = floorHit.point;
 
-		}
+								if (Input.GetMouseButtonDown (0) && !EventSystem.current.IsPointerOverGameObject ()) { 
+										// Non-UI mouse click 
+										GoTo = floorHit.point;
+								}
+
+						}
+
+		} else if (InputType == InputTypes.Meta) {
+			GoTo = GlassPane.GetPoint();
+				}
 
         if (GoTo != player.transform.position && GoTo != Vector3.zero)
         {
@@ -99,6 +131,10 @@ public class GameController : MonoBehaviour {
 
 		}
 	
+	}
+
+	public static int returnInputType(){
+		return (int)InputType;
 	}
 
 

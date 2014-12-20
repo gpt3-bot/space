@@ -2,9 +2,48 @@
 using System.Collections;
 
 public class RotateCameraVoiceControl : MonoBehaviour {
-    private float rotateX = 0.0f;
-    private float rotateY = 0.0f;
-    private float zoom = 250f;
+
+
+	
+	
+	private static RotateCameraVoiceControl _instance;
+	
+	public static RotateCameraVoiceControl instance
+	{
+		get
+		{
+			if(_instance == null)
+			{
+				_instance = GameObject.FindObjectOfType<RotateCameraVoiceControl>();
+				
+				//Tell unity not to destroy this object when loading a new scene!
+				DontDestroyOnLoad(_instance.gameObject);
+			}
+			
+			return _instance;
+		}
+	}
+	
+	void Awake() 
+	{
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
+	}
+
+    private static float rotateX = 0.0f;
+	private static float rotateY = 0.0f;
+	private static float zoom = 250f;
     Quaternion newRotation;
     // if not, you can omit this
     // you'll realize in the inspector a field GameObject will appear
@@ -61,16 +100,16 @@ public class RotateCameraVoiceControl : MonoBehaviour {
 
     }
 
-   public float GetRotateX()
+   public static float GetRotateX()
     {
         return rotateX;
     }
 
-   public float GetRotateY()
+	public static float GetRotateY()
     {
         return rotateY;
     }
-   public float GetZoom()
+	public static float GetZoom()
    {
        return zoom;
 

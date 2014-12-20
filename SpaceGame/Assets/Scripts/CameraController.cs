@@ -4,30 +4,44 @@ using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour {
 
-    public GameObject MainCamera;
-    public GameObject MetaCamera;
+	// Singleton pattern
+	private static CameraController _instance;
+	
+	public static CameraController instance
+	{
+		get
+		{
+			if(_instance == null)
+			{
+				_instance = GameObject.FindObjectOfType<CameraController>();
+				
+				//Tell unity not to destroy this object when loading a new scene!
+				DontDestroyOnLoad(_instance.gameObject);
+			}
+			
+			return _instance;
+		}
+	}
 
-	public GameObject NetworkController;
-	NetworkManager NetworkManagerScript;
+	//field initializers
 
- public Transform WorldCenter;
-  public Transform PlayerCenter;
+
+	GameObject MainCamera;
+	GameObject MetaCamera;
+	static GameObject camera;
+ 	public Transform WorldCenter;
+ 	static Transform PlayerCenter;
 	GameObject player;
+	Transform TargetLookAt;
+	Button WorldButton;
+	Button PlayerButton;
+	GameObject ViewportNavigation;
 
-  private Transform TargetLookAt;
-
-public Button WorldButton;
-public Button PlayerButton;
-public GameObject sliders;
-public GameObject GameController;
-private GameController GameControllerScript;
-private int InputType;
- public Slider SliderX;
-  public Slider SliderY;
-    public Slider SliderZoom;
-    private float sliderZoomValue;
-    public GameObject VoiceControlObject; // you will need this if scriptB is in another GameObject
-    public RotateCameraVoiceControl VoiceControlScript;
+	int InputType;
+	Slider SliderX;
+	Slider SliderY;
+	Slider SliderZoom;
+    float sliderZoomValue;
 
 
  public float Distance = 120.0f;
@@ -52,32 +66,66 @@ private int InputType;
  private float velZ = 0.0f;
  private Vector3 position = Vector3.zero;   
  
- 
+
+	
+	void Awake() 
+	{
+		if(_instance == null)
+		{
+			//If I am the first instance, make me the Singleton
+			_instance = this;
+			DontDestroyOnLoad(this);
+		}
+		else
+		{
+			//If a Singleton already exists and you find
+			//another reference in scene, destroy it!
+			if(this != _instance)
+				Destroy(this.gameObject);
+		}
+
+		MainCamera = GameObject.FindWithTag("MainCamera");
+		MetaCamera = GameObject.FindWithTag("MetaCamera");
+		InputType = GameController.returnInputType ();
+		
+		SliderX = GameObject.Find("SliderX").GetComponent<Slider>();
+		SliderY = GameObject.Find("SliderY").GetComponent<Slider>();
+		SliderZoom = GameObject.Find("SliderZoom").GetComponent<Slider>();
+		
+		WorldButton = GameObject.Find ("WorldButton").GetComponent<Button>();
+		PlayerButton = GameObject.Find ("PlayerButton").GetComponent<Button>();
+		ViewportNavigation = GameObject.Find ("ViewportNavigation");
+
+	}
+
  void  Start (){
-     GameControllerScript = GameController.GetComponent<GameController>();
-     InputType = (int)GameControllerScript.InputType;
-     TargetLookAt = WorldCenter;
- sliderZoomValue = SliderZoom.value;
-  WorldButton.onClick.AddListener(World);
-  PlayerButton.onClick.AddListener(Player);
-  VoiceControlScript = VoiceControlObject.GetComponent<RotateCameraVoiceControl>();
 
-     if (InputType == 0 || InputType == 2)
-     	{
-sliders.SetActive(false);
-     	}
-     // Activate regular camera if not using Meta
-     if (InputType == 0 || InputType == 1){
-         MetaCamera.SetActive(false);
-         MainCamera.SetActive(true);
-     }
 
-     if (InputType == 2){
-         Distance *= 2;
-       MetaCamera.SetActive(true);
-         MainCamera.SetActive(false);
-     }
+		
+		sliderZoomValue = SliderZoom.value;
 
+		WorldButton.onClick.AddListener(World);
+		PlayerButton.onClick.AddListener(Player);
+		
+		if (InputType == 0 || InputType == 2)
+		{
+			ViewportNavigation.SetActive(false);
+		}
+		// Activate regular camera if not using Meta
+		if (InputType == 0 || InputType == 1){
+			camera = MainCamera;
+		}
+
+		// Activate the Meta camera
+		if (InputType == 2){
+			Distance *= 2;
+			MetaCamera.SetActive(true);
+			MainCamera.SetActive(false);
+			camera = MetaCamera;
+		}
+
+
+		TargetLookAt = WorldCenter;
  
      Distance = Mathf.Clamp(Distance, DistanceMin, DistanceMax);
      startingDistance = Distance;
@@ -88,17 +136,9 @@ sliders.SetActive(false);
 	
  void Update (){
 
-		if (PlayerCenter == null) {
-			NetworkManagerScript = NetworkController.GetComponent<NetworkManager>();
-			PlayerCenter = NetworkManagerScript.ReturnPlayer().transform;
+		if(PlayerCenter == null)
+		return;
 
-			return;
-		}
-
-
-     if (TargetLookAt == null)
-         return;
-         
      HandlePlayerInput();
          
      CalculateDesiredPosition();
@@ -124,24 +164,21 @@ sliders.SetActive(false);
          mouseX += Input.GetAxis("Mouse X") * X_MouseSensitivity;
          mouseY -= Input.GetAxis("Mouse Y") * Y_MouseSensitivity;
      }
-     
-     if (InputType == 1)
-     	{
-            Debug.Log("Input type = 1");
-     	mouseX = SliderX.value;
-         mouseY = SliderY.value;
-     }
 
-     if (InputType == 2)
-       
-     {
-         Debug.Log("Input type = 2");
-         mouseX = VoiceControlScript.GetRotateX();
-         mouseY = VoiceControlScript.GetRotateY();
-
-     }
+		     if (InputType == 1)
+		     	{
+		     	mouseX = SliderX.value;
+		         mouseY = SliderY.value;
+		     }
+		
+		     if (InputType == 2)
+		     {
+		         mouseX = RotateCameraVoiceControl.GetRotateX();
+				mouseY = RotateCameraVoiceControl.GetRotateY();
+		
+		     }
      
-   
+  
      
      // this is where the mouseY is limited - Helper script
      mouseY = Mathf.Clamp(mouseY, Y_MinLimit, Y_MaxLimit);
@@ -157,6 +194,13 @@ sliders.SetActive(false);
      desiredDistance = Mathf.Clamp(SliderZoom.value, DistanceMin, DistanceMax);
      sliderZoomValue = SliderZoom.value;
      }
+
+		if(InputType == 2){
+			desiredDistance = Mathf.Clamp(sliderZoomValue, DistanceMin, DistanceMax);
+			sliderZoomValue = RotateCameraVoiceControl.GetZoom();
+		}
+
+
      
  }
  
@@ -170,14 +214,13 @@ sliders.SetActive(false);
  
 
  Vector3  CalculatePosition ( float rotationX ,   float rotationY ,   float distance  ){
-     Debug.Log("Calculating position");
      Vector3 direction = new Vector3(0, 0, -distance);
      Quaternion rotation = Quaternion.Euler(rotationX, rotationY, 0);
      return TargetLookAt.position + (rotation * direction);
  }
  
  void  UpdatePosition (){
-     Debug.Log("Updating position");
+
      float posX= Mathf.SmoothDamp(position.x, desiredPosition.x, ref velX, X_Smooth);
      float posY = Mathf.SmoothDamp(position.y, desiredPosition.y, ref velY, Y_Smooth);
      float posZ = Mathf.SmoothDamp(position.z, desiredPosition.z, ref velZ, X_Smooth);
@@ -186,17 +229,17 @@ sliders.SetActive(false);
      if (InputType == 0 || InputType == 1)
      {
 
-         MainCamera.transform.position = position;
+         camera.transform.position = position;
 
-         MainCamera.transform.LookAt(TargetLookAt);
+			camera.transform.LookAt(TargetLookAt);
 
      }
      if (InputType == 2)
      {
 
-         MetaCamera.transform.position = position;
+			camera.transform.position = position;
 
-         MetaCamera.transform.LookAt(TargetLookAt);
+			camera.transform.LookAt(TargetLookAt);
 
      }
 
@@ -204,8 +247,6 @@ sliders.SetActive(false);
  }
  
  void  Reset (){
-     mouseX = mouseX;
-     mouseY = mouseY;
      Distance = startingDistance;
      desiredDistance = Distance;
  }
@@ -232,4 +273,14 @@ sliders.SetActive(false);
   void  Player (){
       TargetLookAt = PlayerCenter;
 }
+
+	public static void setPlayerCenter(){
+		PlayerCenter = NetworkManager.ReturnPlayer().transform;
+	}
+
+	public static GameObject returnCamera(){
+		return camera;
+	}
+
+
 }

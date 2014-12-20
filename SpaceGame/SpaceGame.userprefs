@@ -1,13 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Networking Scripts/NetworkManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameController.cs">
     <Files>
-      <File FileName="Assets/Scripts/CameraController.cs" Line="93" Column="4" />
-      <File FileName="Assets/Networking Scripts/NetworkManager.cs" Line="65" Column="5" />
+      <File FileName="Assets/Scripts/CameraController.cs" Line="176" Column="47" />
+      <File FileName="Assets/Networking Scripts/NetworkManager.cs" Line="101" Column="17" />
       <File FileName="../../../../Downloads/NetworkingScripts 2/NetworkManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Networking Scripts/ShipMovement.cs" Line="21" Column="2" />
-      <File FileName="Assets/Scripts/GameController.cs" Line="47" Column="1" />
-      <File FileName="Assets/Scripts/RotateCameraVoiceControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Networking Scripts/ShipMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameController.cs" Line="100" Column="31" />
+      <File FileName="Assets/Scripts/RotateCameraVoiceControl.cs" Line="43" Column="2" />
+      <File FileName="Assets/Scripts/UDP_RecoServer.cs" Line="70" Column="65" />
+      <File FileName="Assets/Scripts/Elevator.cs" Line="19" Column="53" />
+      <File FileName="Assets/TurretSystem/Target/Target.cs" Line="29" Column="3" />
+      <File FileName="Assets/Scripts/GlassPane.cs" Line="99" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

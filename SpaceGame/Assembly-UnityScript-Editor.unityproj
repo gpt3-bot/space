@@ -59,7 +59,6 @@
      <None Include="Assets\RAIN\Editor\Shaders\VisualSensorLineShader.shader" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingBlur.shader" />
      <None Include="Assets\Meta Packages\LeanTween\LeanTween-ReadMe.txt" />
-     <None Include="Assets\Space Shooter\Info.txt" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
      <None Include="Assets\Meta Packages\Vectrosity\Documentation\Vectrosity changelog.txt" />
      <None Include="Assets\Meta Packages\HighlightingSystem\Resources\HighlightingInclude.cginc" />

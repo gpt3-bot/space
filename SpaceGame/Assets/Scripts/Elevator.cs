@@ -9,8 +9,6 @@ public class Elevator : MonoBehaviour {
 	public float LimitDown;
 	public Slider slider;
 	private float currentSliderValue;
-    public GameObject GameController;
-    private GameController GameControllerScript;
     private int InputType;
 	public GameObject ElevatorObject;
 	public GameObject OuterSphere;
@@ -18,8 +16,7 @@ public class Elevator : MonoBehaviour {
 
 
 	void Start() {
-        GameControllerScript = GameController.GetComponent<GameController>();
-        InputType = (int)GameControllerScript.InputType;
+        InputType = GameController.returnInputType();
 		slider.minValue = LimitDown;
 		slider.maxValue = LimitUp;
 		slider.value = transform.position.y;
