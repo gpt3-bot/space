@@ -99,7 +99,6 @@ public class NetworkManager : Photon.MonoBehaviour {
 	void OnJoinedRoom() {
 		connected = true;
 		SpawnPlayer();
-		CameraController.setPlayerCenter ();
 	}
 	
 	void SpawnPlayer() {

@@ -128,17 +128,17 @@
  <Reference Include="Meta">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/MetaDLL/Meta.dll</HintPath>
  </Reference>
+ <Reference Include="CoherentUIMobileNet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUIMobileNet.dll</HintPath>
+ </Reference>
+ <Reference Include="CoherentUINet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUINet.dll</HintPath>
+ </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="RAIN">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/RAIN/RAIN.dll</HintPath>
- </Reference>
- <Reference Include="CoherentUINet">
- <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUINet.dll</HintPath>
- </Reference>
- <Reference Include="CoherentUIMobileNet">
- <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUIMobileNet.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

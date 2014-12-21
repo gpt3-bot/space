@@ -43,7 +43,7 @@ public class GameController : MonoBehaviour {
     public enum InputTypes {Mouse, Touch, Meta};
     static public InputTypes InputType;
     // 0 = mouse, 1 = touch, 2 = voice
-
+	
 	public float speed;
 	public float rotationSpeed;
 	GameObject player;
@@ -72,9 +72,14 @@ public class GameController : MonoBehaviour {
 
 
 		if (player == null) {
-			player = NetworkManager.ReturnPlayer();
-						return;
-				}
+			try {
+				player = NetworkManager.ReturnPlayer ();
+			} catch {
+				return;
+			}
+			
+		} else {
+			
 
 
 
@@ -112,7 +117,10 @@ public class GameController : MonoBehaviour {
 
 
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, speed * Time.deltaTime);
+
+				if (playerToMouse != Vector3.zero){
             newRotation = Quaternion.LookRotation(playerToMouse);
+				}
 
         }
 
@@ -125,7 +133,7 @@ public class GameController : MonoBehaviour {
 
 
 
-
+			}
 
 			
 

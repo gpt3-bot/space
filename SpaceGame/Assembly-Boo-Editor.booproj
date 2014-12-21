@@ -107,6 +107,12 @@
  <Reference Include="Newtonsoft.Json">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Photon Unity Networking/Editor/PhotonNetwork/Newtonsoft.Json.dll</HintPath>
  </Reference>
+ <Reference Include="CoherentUIMobileNet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUIMobileNet.dll</HintPath>
+ </Reference>
+ <Reference Include="CoherentUINet">
+ <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUINet.dll</HintPath>
+ </Reference>
  <Reference Include="Photon3Unity3D">
  <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
@@ -137,18 +143,14 @@
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="CoherentUINet">
- <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUINet.dll</HintPath>
- </Reference>
- <Reference Include="CoherentUIMobileNet">
- <HintPath>/Users/shawwalters/Desktop/SpaceGame DO NOT DELETE/spacegame/SpaceGame/Assets/Plugins/CoherentUIMobileNet.dll</HintPath>
- </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{F113282B-8E86-DA30-0830-F57ACABAE0F9}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{6069C91B-B0DC-90CE-2EC4-147CEED1ED66}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-UnityScript.unityproj">
+      <Project>{E181C085-2B8D-6044-CE78-F1611B9313B8}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

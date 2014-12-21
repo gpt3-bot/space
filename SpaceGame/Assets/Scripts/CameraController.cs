@@ -29,19 +29,14 @@ public class CameraController : MonoBehaviour {
 	GameObject MainCamera;
 	GameObject MetaCamera;
 	static GameObject theCamera;
- 	public Transform WorldCenter;
  	static Transform PlayerCenter;
-	GameObject player;
-	Transform TargetLookAt;
-	Button WorldButton;
-	Button PlayerButton;
-	GameObject ViewportNavigation;
+//	GameObject ViewportNavigation;
 
 	int InputType;
-	Slider SliderX;
-	Slider SliderY;
-	Slider SliderZoom;
-    float sliderZoomValue;
+//	Slider SliderX;
+//	Slider SliderY;
+//	Slider SliderZoom;
+//    float sliderZoomValue;
 
 
  public float Distance = 120.0f;
@@ -88,13 +83,12 @@ public class CameraController : MonoBehaviour {
 		MetaCamera = GameObject.FindWithTag("MetaCamera");
 		InputType = GameController.returnInputType ();
 		
-		SliderX = GameObject.Find("SliderX").GetComponent<Slider>();
-		SliderY = GameObject.Find("SliderY").GetComponent<Slider>();
-		SliderZoom = GameObject.Find("SliderZoom").GetComponent<Slider>();
-		
-		WorldButton = GameObject.Find ("WorldButton").GetComponent<Button>();
-		PlayerButton = GameObject.Find ("PlayerButton").GetComponent<Button>();
-		ViewportNavigation = GameObject.Find ("ViewportNavigation");
+//		SliderX = GameObject.Find("SliderX").GetComponent<Slider>();
+//		SliderY = GameObject.Find("SliderY").GetComponent<Slider>();
+//		SliderZoom = GameObject.Find("SliderZoom").GetComponent<Slider>();
+
+	
+//		ViewportNavigation = GameObject.Find ("ViewportNavigation");
 
 	}
 
@@ -102,14 +96,11 @@ public class CameraController : MonoBehaviour {
 
 
 		
-		sliderZoomValue = SliderZoom.value;
+//		sliderZoomValue = SliderZoom.value;
 
-		WorldButton.onClick.AddListener(World);
-		PlayerButton.onClick.AddListener(Player);
-		
 		if (InputType == 0 || InputType == 2)
 		{
-			ViewportNavigation.SetActive(false);
+//			ViewportNavigation.SetActive(false);
 		}
 		// Activate regular camera if not using Meta
 		if (InputType == 0 || InputType == 1){
@@ -124,8 +115,6 @@ public class CameraController : MonoBehaviour {
 			theCamera = MetaCamera;
 		}
 
-
-		TargetLookAt = WorldCenter;
  
      Distance = Mathf.Clamp(Distance, DistanceMin, DistanceMax);
      startingDistance = Distance;
@@ -136,23 +125,21 @@ public class CameraController : MonoBehaviour {
 	
  void Update (){
 
-		if(PlayerCenter == null)
-		return;
+		if (PlayerCenter == null) {
+						try {
+								PlayerCenter = NetworkManager.ReturnPlayer ().transform;
+						} catch {
+								return;
+						}
+			
+				} else {
 
-     HandlePlayerInput();
+						HandlePlayerInput ();
          
-     CalculateDesiredPosition();
+						CalculateDesiredPosition ();
          
-     UpdatePosition();
-     
-     if(Input.GetKey(KeyCode.R)){
-     TargetLookAt = WorldCenter;
-     }
-     
-      if(Input.GetKey(KeyCode.T)){
-     TargetLookAt = PlayerCenter;
-     }
-
+						UpdatePosition ();
+				}
      
  }
  
@@ -165,11 +152,11 @@ public class CameraController : MonoBehaviour {
          mouseY -= Input.GetAxis("Mouse Y") * Y_MouseSensitivity;
      }
 
-		     if (InputType == 1)
-		     	{
-		     	mouseX = SliderX.value;
-		         mouseY = SliderY.value;
-		     }
+//		     if (InputType == 1)
+//		     	{
+//		     	mouseX = SliderX.value;
+//		         mouseY = SliderY.value;
+//		     }
 		
 		     if (InputType == 2)
 		     {
@@ -190,15 +177,15 @@ public class CameraController : MonoBehaviour {
                                                                              DistanceMin, DistanceMax);
      }
      
-     if(InputType == 1 && SliderZoom.value != sliderZoomValue){
-     desiredDistance = Mathf.Clamp(SliderZoom.value, DistanceMin, DistanceMax);
-     sliderZoomValue = SliderZoom.value;
-     }
-
-		if(InputType == 2){
-			desiredDistance = Mathf.Clamp(sliderZoomValue, DistanceMin, DistanceMax);
-			sliderZoomValue = RotateCameraVoiceControl.GetZoom();
-		}
+//     if(InputType == 1 && SliderZoom.value != sliderZoomValue){
+//     desiredDistance = Mathf.Clamp(SliderZoom.value, DistanceMin, DistanceMax);
+//     sliderZoomValue = SliderZoom.value;
+//     }
+//
+//		if(InputType == 2){
+//			desiredDistance = Mathf.Clamp(sliderZoomValue, DistanceMin, DistanceMax);
+//			sliderZoomValue = RotateCameraVoiceControl.GetZoom();
+//		}
 
 
      
@@ -216,7 +203,7 @@ public class CameraController : MonoBehaviour {
  Vector3  CalculatePosition ( float rotationX ,   float rotationY ,   float distance  ){
      Vector3 direction = new Vector3(0, 0, -distance);
      Quaternion rotation = Quaternion.Euler(rotationX, rotationY, 0);
-     return TargetLookAt.position + (rotation * direction);
+     return PlayerCenter.position + (rotation * direction);
  }
  
  void  UpdatePosition (){
@@ -231,7 +218,7 @@ public class CameraController : MonoBehaviour {
 
 			theCamera.transform.position = position;
 
-			theCamera.transform.LookAt(TargetLookAt);
+			theCamera.transform.LookAt(PlayerCenter);
 
      }
      if (InputType == 2)
@@ -239,7 +226,7 @@ public class CameraController : MonoBehaviour {
 
 			theCamera.transform.position = position;
 
-			theCamera.transform.LookAt(TargetLookAt);
+			theCamera.transform.LookAt(PlayerCenter);
 
      }
 
@@ -265,15 +252,6 @@ public class CameraController : MonoBehaviour {
      
  }
  
- void  World (){
-      TargetLookAt = WorldCenter;
-
- }
- 
-  void  Player (){
-      TargetLookAt = PlayerCenter;
-}
-
 	public static void setPlayerCenter(){
 		PlayerCenter = NetworkManager.ReturnPlayer().transform;
 	}
